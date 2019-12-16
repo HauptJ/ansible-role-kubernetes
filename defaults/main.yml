@@ -24,11 +24,14 @@ kubernetes_web_ui_manifest_file: https://raw.githubusercontent.com/kubernetes/da
 
 kubernetes_pod_network:
   # Flannel CNI.
-  cni: 'flannel'
-  cidr: '10.244.0.0/16'
+  #cni: 'flannel'
+  #cidr: '10.244.0.0/16'
   # Calico CNI.
   # cni: 'calico'
   # cidr: '192.168.0.0/16'
+  # kube-router CNI
+  cni: 'kube-router'
+  cidr: '10.244.0.0/16'
 
 kubernetes_apiserver_advertise_address: ''
 kubernetes_version_kubeadm: 'stable-{{ kubernetes_version }}'
