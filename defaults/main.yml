@@ -24,11 +24,14 @@ kubernetes_web_ui_manifest_file: https://raw.githubusercontent.com/kubernetes/da
 
 kubernetes_pod_network:
   # Flannel CNI.
-  cni: 'flannel'
-  cidr: '10.244.0.0/16'
+  #cni: 'flannel'
+  #cidr: '10.244.0.0/16'
   # Calico CNI.
   # cni: 'calico'
   # cidr: '192.168.0.0/16'
+  # kube-router CNI
+  cni: 'kube-router'
+  cidr: '10.244.0.0/16'
 
 kubernetes_apiserver_advertise_address: ''
 kubernetes_version_kubeadm: 'stable-{{ kubernetes_version }}'
@@ -45,5 +48,9 @@ kubernetes_yum_arch: x86_64
 kubernetes_flannel_manifest_file_rbac: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
 kubernetes_flannel_manifest_file: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
+# Kube-Router config files.
+kubernetes_kuberouter_manifest_file: >-
+  https://raw.githubusercontent.com/cloudnativelabs/kube-router/master/daemonset/kubeadm-kuberouter-all-features.yaml
+kubernetes_kubeproxy_version: '1.10.2'
 # Calico config files
 kubernetes_calico_manifest_file: https://docs.projectcalico.org/v3.10/manifests/calico.yaml
