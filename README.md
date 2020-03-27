@@ -24,8 +24,8 @@ Available variables are listed below, along with default values (see `defaults/m
 
 Kubernetes packages to be installed on the server. You can either provide a list of package names, or set `name` and `state` to have more control over whether the package is `present`, `absent`, `latest`, etc.
 
-    kubernetes_version: '1.16'
-    kubernetes_version_rhel_package: '1.16.4'
+    kubernetes_version: '1.17'
+    kubernetes_version_rhel_package: '1.17.2'
 
 The minor version of Kubernetes to install. The plain `kubernetes_version` is used to pin an apt package version on Debian, and as the Kubernetes version passed into the `kubeadm init` command (see `kubernetes_version_kubeadm`). The `kubernetes_version_rhel_package` variable must be a specific Kubernetes release, and is used to pin the version on Red Hat / CentOS servers.
 
@@ -59,11 +59,16 @@ Whether to enable the Kubernetes web dashboard UI (only accessible on the master
       # Flannel CNI.
       cni: 'flannel'
       cidr: '10.244.0.0/16'
+      #
       # Calico CNI.
       # cni: 'calico'
       # cidr: '192.168.0.0/16'
+      #
+      # Weave CNI.
+      # cni: 'weave'
+      # cidr: '192.168.0.0/16'
 
-This role currently supports `flannel` (default) or `calico` for cluster pod networking. Choose one or the other for your cluster; converting between the two is not done automatically and could result in broken networking, and should be done outside of this role.
+This role currently supports `flannel` (default), `calico` or `weave` for cluster pod networking. Choose only one for your cluster; converting between them is not done automatically and could result in broken networking; if you need to switch from one to another, it should be done outside of this role.
 
     kubernetes_apiserver_advertise_address: ''
     kubernetes_version_kubeadm: 'stable-{{ kubernetes_version }}'
