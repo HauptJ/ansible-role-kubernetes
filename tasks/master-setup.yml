@@ -57,6 +57,17 @@
   register: weave_result
   changed_when: "'created' in weave_result.stdout"
   when: kubernetes_pod_network.cni == 'weave'
+- name: Configure Kube-Router networking.
+  command: "{{ item }}"
+  with_items:
+    - kubectl apply -f {{ kubernetes_kuberouter_manifest_file }}
+    - kubectl -n kube-system delete ds kube-proxy
+    - >-
+        docker run --privileged -v /lib/modules:/lib/modules --net=host
+        k8s.gcr.io/kube-proxy-amd64:v{{ kubernetes_kubeproxy_version }} kube-proxy --cleanup
+  register: kuberouter_result
+  changed_when: "'created' in kuberouter_result.stdout"
+  when: kubernetes_pod_network.cni == 'kube-router'
 
 # TODO: Check if taint exists with something like `kubectl describe nodes`
 # instead of using kubernetes_init_stat.stat.exists check.
