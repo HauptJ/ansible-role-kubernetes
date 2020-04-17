@@ -27,11 +27,11 @@ kubernetes_pod_network:
   #cni: 'flannel'
   #cidr: '10.244.0.0/16'
   # Calico CNI.
-  # cni: 'calico'
-  # cidr: '192.168.0.0/16'
+  cni: 'calico'
+  cidr: '192.168.0.0/16'
   # kube-router CNI
-  cni: 'kube-router'
-  cidr: '10.244.0.0/16'
+  #cni: 'kube-router'
+  #cidr: '10.244.0.0/16'
 
 kubernetes_apiserver_advertise_address: ''
 kubernetes_version_kubeadm: 'stable-{{ kubernetes_version }}'
